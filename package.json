@@ -1,0 +1,33 @@
+{
+  "name": "sketch-test-inspector",
+  "version": "1.0.0",
+  "description": "Helper utils and plugin for running unit tests on sketch plugins",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianburr/sketch-test-inspector.git"
+  },
+  "keywords": [
+    "sketch",
+    "sketchtool",
+    "sketch-inspector",
+    "unittest"
+  ],
+  "author": "Julian Burr <hello@julianburr.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/julianburr/sketch-test-inspector/issues"
+  },
+  "homepage": "https://github.com/julianburr/sketch-test-inspector#readme",
+  "dependencies": {
+    "fs-extra": "^4.0.1",
+    "invariant": "^2.2.2",
+    "watch": "^1.0.2"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
+}
