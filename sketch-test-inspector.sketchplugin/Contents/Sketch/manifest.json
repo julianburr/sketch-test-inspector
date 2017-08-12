@@ -1,0 +1,47 @@
+{
+  "name": "Test Inspector",
+  "identifier": "com.julianburr.sketch-test-inspector",
+  "description": "Helper plugin that ",
+  "authorEmail": "hello@julianburr.de",
+  "author": "Julian Burr",
+  "disableCocoaScriptPreprocessor": true,
+  "commands": [
+    {
+      "script": "plugin.js",
+      "handler": "openFile",
+      "identifier": "openFile",
+      "name": "open file"
+    },
+    {
+      "script": "plugin.js",
+      "name": "Log Action",
+      "handlers" : {
+        "actions" : {
+          "RunPluginCommand.finish": "logPluginCommandAction"
+        }
+      },
+      "identifier": "logAction"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "reset",
+      "identifier": "reset",
+      "name": "reset"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "selectLayers",
+      "identifier": "selectLayers",
+      "name": "select layers"
+    }
+  ],
+  "menu": {
+    "isRoot": 1,
+    "items": [
+      {
+        "title": "Test Inspector",
+        
+      }
+    ]
+  },
+}
