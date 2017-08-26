@@ -1,7 +1,7 @@
 {
   "name": "Test Inspector",
   "identifier": "com.julianburr.sketch-test-inspector",
-  "description": "Helper plugin that ",
+  "description": "Helper plugin for sketch-test-inspector",
   "authorEmail": "hello@julianburr.de",
   "author": "Julian Burr",
   "disableCocoaScriptPreprocessor": true,
@@ -33,6 +33,18 @@
       "handler": "selectLayers",
       "identifier": "selectLayers",
       "name": "select layers"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "saveDocument",
+      "identifier": "saveDocument",
+      "name": "save document"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "closeDocument",
+      "identifier": "closeDocument",
+      "name": "close document"
     }
   ],
   "menu": {
