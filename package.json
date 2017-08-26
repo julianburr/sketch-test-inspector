@@ -1,6 +1,6 @@
 {
   "name": "sketch-test-inspector",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Helper utils and plugin for running unit tests on sketch plugins",
   "main": "lib/index.js",
   "scripts": {
