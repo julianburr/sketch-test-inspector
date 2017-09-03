@@ -83,12 +83,6 @@ This will run the jest tests that use `sketch-test-inspector` to run plugin comm
 
 ## Methods
 
-For a bit of jsdocs run
-
-```bash
-yarn docs
-```
-
 ### setPlugin(name)
 Sets the plugin for your inspector.
 
