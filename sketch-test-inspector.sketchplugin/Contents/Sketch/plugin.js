@@ -45,24 +45,19 @@ function logPluginCommandAction (context) {
   const cmd = context.actionContext.command;
   const actionName = String(cmd);
 
-  if (!cmd || actionName.startsWith('com.julianburr.test-inspector')) {
+  log(`should I write action! ${actionName}...`)
+  if (!cmd || actionName.startsWith('com.julianburr.sketch-test-inspector')) {
     return;
   }
 
   const path = context.scriptPath
     .stringByDeletingLastPathComponent()
     .stringByDeletingLastPathComponent();
-  const actionsPath = String(path) + '/Resources/actions.json';
-
   const ts = NSDate.date().timeIntervalSince1970();
-  const actions = readJson(actionsPath) || [];
-  log('actions')
-  log(actions)
-  actions.push({
-    command: actionName,
-    ts: String(ts)
-  });
-  writeJson(actions, actionsPath);
+  const actionsPath = `${String(path)}/Resources/actions/${String(actionName).replace('/', '_')}-${String(ts)}.txt`;
+
+  log(`writing file yo! ${String(ts)} -- ${actionsPath}`)
+  writeFile(String(actionName), actionsPath);
 }
 
 /**
@@ -78,7 +73,7 @@ function reset (context) {
  * @param  {Object} context
  */
 function saveDocument (context) {
-  context.document.saveDocument('test-inspector');
+  context.document.saveDocument('sketch-test-inspector');
 }
 
 /**
@@ -129,6 +124,18 @@ function writeJson (jsonData, filePath) {
   log(filePath)
   NSString
     .stringWithFormat(JSON.stringify(jsonData))
+    .writeToFile_atomically_encoding_error(filePath, true, NSUTF8StringEncoding, null);
+}
+
+/**
+ * Write string to file
+ * @param  {string} string
+ * @param  {string} filePath
+ */
+function writeFile (string, filePath) {
+  log(`writeFile :: ${filePath}`)
+  NSString
+    .stringWithString(string)
     .writeToFile_atomically_encoding_error(filePath, true, NSUTF8StringEncoding, null);
 }
 

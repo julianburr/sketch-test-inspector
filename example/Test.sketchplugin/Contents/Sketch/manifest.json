@@ -2,7 +2,7 @@
   "identifier" : "com.example.Test",
   "name" : "Test",
   "author" : "Julian Burr",
-  "version" : "1.0.0",
+  "version" : "1.0",
   "commands" : [
     {
       "script": "plugin.js",

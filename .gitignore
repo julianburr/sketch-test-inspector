@@ -1,1 +1,7 @@
+# Node Modules
 node_modules
+
+# Sketch Test Inspector Plugin Temporary Files
+sketch-test-inspector.sketchplugin/Contents/Resources/context.json
+sketch-test-inspector.sketchplugin/Contents/Resources/tmp/*.sketch
+sketch-test-inspector.sketchplugin/Contents/Resources/actions/*.txt

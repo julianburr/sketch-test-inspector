@@ -1,5 +1,5 @@
 {
-  "name": "sketchtest-inspector-example.sketchplugin",
+  "name": "test-inspector.sketchplugin",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
