@@ -1,6 +1,6 @@
 # sketch-test-inspector
 
-Helper utils and plugin for running unit tests on sketch plugins.
+🕵️‍♀️ Helper utils and plugin for running unit tests on sketch plugins.
 
 ## Why?
 
@@ -61,6 +61,26 @@ describe('My awesome plugin', () => {
 });
 ```
 
+## Example
+
+  1. Install `sketch-test-inspector.sketchplugin` (by double clicking on it)
+  2. Install `example/Test.sketchplugin`
+  3. Change into the `Test.sketchplugin` folder, and run:
+
+```
+yarn
+yarn test
+```
+
+This will run the jest tests that use `sketch-test-inspector` to run plugin commands on a prepared test file. Note: the last test is supposed to fail, since there is a "typo" in `plugin.js` (it says "Cicle" instead of "Circle") … the example should point that out and the test should all pass once you fix that error (and reinstall the plugin, if you change it outside of Sketch's plugin folder).
+
+
+
+![sketch-test-inspector](http://dev.burrdesign.de/sketch-test-inspector.gif)
+
+
+
+
 ## Methods
 
 For a bit of jsdocs run
@@ -74,7 +94,7 @@ Sets the plugin for your inspector.
 
 **Params:**
  * **name:** The file name of your sketch plugin (with or without the `.sketchplugin` extension)
- 
+
 ### openFile(path)
 Opens the specified file in sketch so you can run commands on it.
 

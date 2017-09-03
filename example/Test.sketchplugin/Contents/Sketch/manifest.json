@@ -1,0 +1,27 @@
+{
+  "identifier" : "com.example.Test",
+  "name" : "Test",
+  "author" : "Julian Burr",
+  "version" : "1.0.0",
+  "commands" : [
+    {
+      "script": "plugin.js",
+      "name": "Rename All Rectangles",
+      "handler": "renameAllRectangles",
+      "identifier": "renameAllRectangles"
+    },
+    {
+      "script": "plugin.js",
+      "name": "Remove Selected Layers",
+      "handler": "removeSelected",
+      "identifier": "removeSelected"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "renameAllRectangles",
+      "removeSelected"
+    ],
+    "title" : "This Plugin wants to be tested"
+  }
+}
