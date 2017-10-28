@@ -1,7 +1,7 @@
 // Renames `Rectangle` to `Circle` in all layers
-function renameAllRectangles (context) {  
+function renameAllRectangles (context) {
   context.document.pages()[0].layers().forEach(layer => {
-    const newName = String(layer.name()).replace('Rectangle', 'Cicle');
+    const newName = String(layer.name()).replace('Rectangle', 'Circle');
     layer.name = newName;
   });
 }

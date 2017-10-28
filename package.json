@@ -1,6 +1,6 @@
 {
   "name": "sketch-test-inspector",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Helper utils and plugin for running unit tests on sketch plugins",
   "main": "lib/index.js",
   "scripts": {
@@ -25,6 +25,8 @@
   "dependencies": {
     "fs-extra": "^4.0.1",
     "invariant": "^2.2.2",
+    "path": "^0.12.7",
+    "sketchtool-cli": "^0.0.2",
     "watch": "^1.0.2"
   },
   "devDependencies": {

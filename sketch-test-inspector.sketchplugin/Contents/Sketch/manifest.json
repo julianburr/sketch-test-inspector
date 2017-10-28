@@ -45,6 +45,12 @@
       "handler": "closeDocument",
       "identifier": "closeDocument",
       "name": "close document"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "runScript",
+      "identifier": "runScript",
+      "name": "run script"
     }
   ],
   "menu": {
@@ -52,7 +58,6 @@
     "items": [
       {
         "title": "Test Inspector",
-        
       }
     ]
   },

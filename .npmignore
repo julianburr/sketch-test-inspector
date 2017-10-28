@@ -1,5 +1,4 @@
 # Ignore sketch plugin & example in npm
-sketch-test-inspector.sketchplugin
 example
 
 # Also ignore unit tests

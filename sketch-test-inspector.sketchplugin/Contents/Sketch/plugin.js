@@ -12,8 +12,11 @@ function openFile (context) {
   const documentController = NSDocumentController.sharedDocumentController();
   const url = NSURL.fileURLWithPath(customContext.filePath);
 
-  const openedDocument = documentController
-    .openDocumentWithContentsOfURL_display_error(url, true, null);
+  const openedDocument = documentController.openDocumentWithContentsOfURL_display_error(
+    url,
+    true,
+    null
+  );
 
   openedDocument.documentWindow().makeKeyAndOrderFront(null);
 }
@@ -32,7 +35,7 @@ function selectLayers (context) {
         layer.select_byExpandingSelection(true, i > 0); // Resets selection for first item!
         i++;
       }
-    })
+    });
   });
 }
 
@@ -45,7 +48,7 @@ function logPluginCommandAction (context) {
   const cmd = context.actionContext.command;
   const actionName = String(cmd);
 
-  log(`should I write action! ${actionName}...`)
+  log(`should I write action! ${actionName}...`);
   if (!cmd || actionName.startsWith('com.julianburr.sketch-test-inspector')) {
     return;
   }
@@ -54,9 +57,10 @@ function logPluginCommandAction (context) {
     .stringByDeletingLastPathComponent()
     .stringByDeletingLastPathComponent();
   const ts = NSDate.date().timeIntervalSince1970();
-  const actionsPath = `${String(path)}/Resources/actions/${String(actionName).replace('/', '_')}-${String(ts)}.txt`;
+  const actionsPath = `${String(path)}/Resources/actions/${String(
+    actionName
+  ).replace('/', '_')}-${String(ts)}.txt`;
 
-  log(`writing file yo! ${String(ts)} -- ${actionsPath}`)
   writeFile(String(actionName), actionsPath);
 }
 
@@ -65,7 +69,7 @@ function logPluginCommandAction (context) {
  * @param  {Object} context
  */
 function reset (context) {
-  log('reset me...')
+  log('reset me.....');
 }
 
 /**
@@ -82,6 +86,23 @@ function saveDocument (context) {
  */
 function closeDocument (context) {
   context.document.close();
+}
+
+function runScript (context) {
+  const customContext = getCustomContext(context);
+  const script = customContext.script;
+  if (!script) {
+    log(`Could not find script to run!`);
+    return;
+  }
+
+  const scriptFnc = eval(script);
+  if (typeof scriptFnc !== 'function') {
+    log(`Could not turn given script into valid function!`);
+    return;
+  }
+
+  scriptFnc(context);
 }
 
 // #######################################################
@@ -120,11 +141,16 @@ function readJson (filePath) {
  * @param  {string} filePath
  */
 function writeJson (jsonData, filePath) {
-  log('writeJson')
-  log(filePath)
-  NSString
-    .stringWithFormat(JSON.stringify(jsonData))
-    .writeToFile_atomically_encoding_error(filePath, true, NSUTF8StringEncoding, null);
+  log('writeJson');
+  log(filePath);
+  NSString.stringWithFormat(
+    JSON.stringify(jsonData)
+  ).writeToFile_atomically_encoding_error(
+    filePath,
+    true,
+    NSUTF8StringEncoding,
+    null
+  );
 }
 
 /**
@@ -133,10 +159,13 @@ function writeJson (jsonData, filePath) {
  * @param  {string} filePath
  */
 function writeFile (string, filePath) {
-  log(`writeFile :: ${filePath}`)
-  NSString
-    .stringWithString(string)
-    .writeToFile_atomically_encoding_error(filePath, true, NSUTF8StringEncoding, null);
+  log(`writeFile :: ${filePath}`);
+  NSString.stringWithString(string).writeToFile_atomically_encoding_error(
+    filePath,
+    true,
+    NSUTF8StringEncoding,
+    null
+  );
 }
 
 // #######################################################
@@ -154,4 +183,3 @@ function getCustomContext (context) {
   const customContext = readJson(contextPath) || {};
   return customContext;
 }
-

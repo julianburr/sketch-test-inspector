@@ -14,6 +14,12 @@ Sketch plugins are very hard to write unit tests for. This helper library (+ plu
 
 Because sketchtool makes it easy to get information about a certain file, or to run a certain plugin command in sketch, but its quite hard to do both. This helper library is build on top of sketchtool (which comes with every Sketch version) to overcome these difficulties.
 
+## NOTE: Problems with async
+
+I couldn't find a proper way yet to ensure a plugin command has fished, in order to use it as reference when to save the document and resolve the promise returned by the `runPluginCommand` and `runScript` methods. So, for now as a quick fix, I just use timeouts, which will work as long as you don't have any long running processes in your script.
+
+I am currently working on an alternative handling and happy for any ideas 😊
+
 ## Getting started
 
 ```bash
@@ -22,8 +28,6 @@ yarn add sketch-test-inspector --dev
 # or
 npm i sketch-test-instepctor --dev
 ```
-
-Also, download the `sketch-test-inspector.sketchplugin` from this repo and double click on it to install it. Make sure it is activated in Sketch when you are using the node script.
 
 ## How to use it
 
@@ -63,22 +67,22 @@ describe('My awesome plugin', () => {
 
 ## Example
 
-  1. Install `sketch-test-inspector.sketchplugin` (by double clicking on it)
-  2. Install `example/Test.sketchplugin`
-  3. Change into the `Test.sketchplugin` folder, and run:
+```bash
+# Clone repo
+gitclone https://github.com/julianburr/sketch-test-inspector.git
 
-```
+# Change into repos example dir
+cd sketch-test-inspector/example
+
+# Install dependencies and run test
 yarn
 yarn test
 ```
 
-This will run the jest tests that use `sketch-test-inspector` to run plugin commands on a prepared test file. Note: the last test is supposed to fail, since there is a "typo" in `plugin.js` (it says "Cicle" instead of "Circle") … the example should point that out and the test should all pass once you fix that error (and reinstall the plugin, if you change it outside of Sketch's plugin folder).
-
+This will run the jest tests that use `sketch-test-inspector` to run plugin commands on a prepared test file.
 
 
 ![sketch-test-inspector](http://dev.burrdesign.de/sketch-test-inspector.gif)
-
-
 
 
 ## Methods
@@ -112,6 +116,12 @@ Runs specified command identifier on plugin that has been specified before via `
 
 **Params:**
  * **identifier** The plugin command identifier you want to run on the currently opened file.
+
+### runScript(fnc)
+Runs specified custom script as plugin command. The function will receive the command context and will then be run within Sketch, giving it access the whole cocoascript environent of Sketch plugins.
+
+**Params:**
+ * **fnc** The function you want to run as plugin command
 
 ### dump
 `sketchtool dump ${currentFilePath}`

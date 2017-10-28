@@ -1,11 +1,11 @@
 const path = require('path');
 
 const sketchtool = require('sketchtool-cli');
-const inspector = require('sketch-test-inspector');
+const inspector = require('../../../lib/index');
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+// jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 inspector.reset();
-inspector.setPlugin('Test.sketchplugin');
+inspector.setPlugin('Test.sketchplugin', path.resolve(__dirname, '../..'));
 
 describe('First Step', () => {
   describe('Makes sketchtool available as cli util as part of the testing framework', () => {
@@ -22,7 +22,7 @@ describe('Opening files', () => {
     inspector.openFile(testFile);
     const layers = inspector.layers();
 
-    it('Can read all pages of the opened document', () => {  
+    it('Can read all pages of the opened document', () => {
       expect(layers.pages.length).toBe(1);
       expect(layers.pages[0].name).toBe('Page 1');
     });
@@ -44,8 +44,9 @@ describe('Running plugin commands', () => {
     it('Can use the `setSelection` util from inspector', done => {
       inspector.openFile(testFile);
       const layers = inspector.layers().pages[0].layers;
-      inspector.selectLayers([layers[2]]);
-      inspector.runPluginCommand('removeSelected')
+      inspector.selectLayers([ layers[2] ]);
+      inspector
+        .runPluginCommand('removeSelected')
         .then(() => {
           const newLayers = inspector.layers().pages[0].layers;
           expect(newLayers.length).toBe(layers.length - 1);
@@ -60,15 +61,12 @@ describe('Running plugin commands', () => {
 
     it('Can access the pages and layers of the file after the command has been run', done => {
       inspector.openFile(testFile);
-      inspector.runPluginCommand('renameAllRectangles')
+      inspector
+        .runPluginCommand('renameAllRectangles')
         .then(() => {
           const pageLayers = inspector.layers().pages[0].layers;
           const layerNames = pageLayers.map(layer => layer.name);
-          expect(layerNames).toEqual([
-            'Circle',
-            'Circle 2',
-            'Circle 3'
-          ]);
+          expect(layerNames).toEqual([ 'Circle', 'Circle 2', 'Circle 3' ]);
           inspector.closeDocument();
           done();
         })
@@ -78,5 +76,18 @@ describe('Running plugin commands', () => {
         });
     });
 
+    it('Can run custom scrits using `inspector.runScript`', done => {
+      inspector.openFile(testFile);
+      inspector
+        .runScript(context => context.document.showMessage('It works!'))
+        .then(() => {
+          inspector.closeDocument();
+          done();
+        })
+        .catch(e => {
+          inspector.closeDocument();
+          done.fail(e);
+        });
+    });
   });
 });

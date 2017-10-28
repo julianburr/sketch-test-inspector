@@ -1,5 +1,5 @@
 {
-  "name": "test-inspector.sketchplugin",
+  "name": "Test.sketchplugin",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "sketchtool-cli": "^0.0.2"
   }
 }
